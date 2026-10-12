@@ -1,5 +1,5 @@
 import { photoUrls } from './photos';
-import logo from '../assets/tisan-logo.png.asset.json';
+import logo from '../assets/tisan-logo-mark.png.asset.json';
 import hero1 from '../assets/hero-residence.jpg';
 import hero2 from '../assets/hero-towers.jpg';
 import hero3 from '../assets/hero-commercial.jpg';
