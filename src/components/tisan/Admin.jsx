@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useTisan } from './state';
 import { Icon, Button, IconButton, Photo, Field, makeId } from './ui';
 import { categories, galleryCategories, validImageUrl } from '../../data/tisan';
@@ -210,8 +210,9 @@ function ProjectsManager() {
       const { cover: _c, gallery: _g, ...rest } = draft;
       const record = { ...rest, title: draft.title.trim(), imageId: cover.id, galleryIds };
       let projects = draft.id ? d.projects.map((p) => (p.id === draft.id ? record : p)) : [...d.projects, { ...record, id: makeId() }];
-      if (record.featured) projects = projects.map((p) => ({ ...p, featured: p.title === record.title && p.imageId === record.imageId }));
-      return { ...d, images, projects };
+      const saved = projects.find((p) => p.imageId === cover.id);
+      if (record.featured && saved) projects = projects.map((p) => ({ ...p, featured: p.id === saved.id }));
+      return { ...d, images, projects, content: record.featured && saved ? { ...d.content, featuredProjectId: saved.id } : d.content };
     });
     c.notify('Project saved — the portfolio is updated.');
     setDraft(null);
@@ -313,7 +314,7 @@ function GalleryManager() {
     if (Object.keys(e).length) return;
     c.setData((d) => {
       let { images, id } = upsertImage(d.images, draft.imageId, draft.url, { section: 'Gallery', alt: draft.alt, caption: draft.title, category: draft.category });
-      images = images.map((x) => (x.id === id ? { ...x, alt: draft.alt, caption: draft.title, category: draft.category, published: draft.published } : x));
+      images = images.map((x) => (x.id === id ? { ...x, alt: draft.alt, caption: draft.title, category: draft.category, published: true } : x));
       const { url, alt, ...record } = { ...draft, imageId: id };
       return { ...d, images, gallery: draft.id ? d.gallery.map((g) => (g.id === draft.id ? record : g)) : [...d.gallery, { ...record, id: makeId() }] };
     });
@@ -353,6 +354,8 @@ function ImageManager() {
   const [draft, setDraft] = useState(null);
   const [errors, setErrors] = useState({});
   const list = data.images.filter((x) => section === 'All' || x.section === section);
+  const [targetId, setTargetId] = useState('');
+  const targetRecords = draft?.section === 'Services' ? data.services : ['Project Covers', 'Project Details'].includes(draft?.section) ? data.projects : [];
   const set = (fn) => setData((d) => ({ ...d, images: fn(d.images) }));
   const usedBy = (id) => {
     const refs = [];
@@ -366,6 +369,7 @@ function ImageManager() {
     const e = {};
     if (!validImageUrl(draft.url)) e.url = 'Enter a valid https:// image URL.';
     if (!draft.alt.trim()) e.alt = 'Alt text is required.';
+    if (!draft.id && ['Project Covers', 'Project Details', 'Services'].includes(draft.section) && !targetId) e.target = 'Choose the record that will display this image.';
     if (data.images.some((x) => x.id !== draft.id && x.url === draft.url)) e.url = 'This image is already used elsewhere. Please use a unique photo.';
     setErrors(e);
     if (Object.keys(e).length) return;
@@ -374,6 +378,11 @@ function ImageManager() {
       const id = `image-${makeId()}`;
       const next = { ...d, images: [...d.images, { ...draft, id }] };
       if (draft.section === 'Gallery') next.gallery = [...d.gallery, { id: makeId(), title: draft.caption || draft.alt, category: galleryCategories.includes(draft.category) ? draft.category : 'Architecture', imageId: id, published: draft.published }];
+      if (draft.section === 'Hero Banners') next.banners = [...d.banners, { ...d.banners[0], id: makeId(), imageId: id, heading: draft.caption || draft.alt, published: draft.published, primaryText: 'Explore Our Projects', primaryTarget: '#projects', secondaryText: 'Connect With Us', secondaryTarget: '#contact' }];
+      if (draft.section === 'Services') next.services = d.services.map((s) => s.id === targetId ? { ...s, imageId: id } : s);
+      if (draft.section === 'Project Covers') next.projects = d.projects.map((p) => p.id === targetId ? { ...p, imageId: id } : p);
+      if (draft.section === 'Project Details') next.projects = d.projects.map((p) => p.id === targetId ? { ...p, galleryIds: [...p.galleryIds, id] } : p);
+      if (['About', 'Featured Banner', 'Why Choose Us', 'Contact'].includes(draft.section)) next.images = [next.images.at(-1), ...next.images.slice(0, -1)];
       return next;
     });
     notify('Image saved — its section on the website is updated.');
@@ -390,7 +399,7 @@ function ImageManager() {
     const i = same.findIndex((x) => x.id === img.id);
     const target = same[i + dir];
     if (!target) return all;
-    const a = all.indexOf(img), b = all.findIndex((x) => x.id === target.id);
+    const a = all.findIndex((x) => x.id === img.id), b = all.findIndex((x) => x.id === target.id);
     return move(all, a, b - a);
   });
   const f = (k) => ({ value: draft[k], onChange: (e) => setDraft({ ...draft, [k]: e.target.value }) });
@@ -403,6 +412,7 @@ function ImageManager() {
           <Field label="Alt text *" error={errors.alt}><input {...f('alt')} maxLength={160} /></Field>
           <Field label="Caption"><input {...f('caption')} maxLength={120} /></Field>
           <Field label="Website section"><select {...f('section')} disabled={!!draft.id}>{imageSections.map((x) => <option key={x}>{x}</option>)}</select></Field>
+          {!draft.id && targetRecords.length > 0 && <Field label="Display in record *" error={errors.target}><select value={targetId} onChange={(e) => setTargetId(e.target.value)}><option value="">Select record</option>{targetRecords.map((r) => <option key={r.id} value={r.id}>{r.title}</option>)}</select></Field>}
           <Field label="Category"><select {...f('category')}>{[...new Set([...galleryCategories, ...categories])].map((x) => <option key={x}>{x}</option>)}</select></Field>
           <PublishedBox value={draft.published} onChange={(v) => setDraft({ ...draft, published: v })} />
         </FormShell>
@@ -450,12 +460,12 @@ function EnquiriesManager() {
       </div>
       <div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>Name</th><th>Contact</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead><tbody>
         {list.map((e) => (
-          <>
+          <Fragment key={e.id}>
             <tr key={e.id}><td className="record-name">{e.name}<br /><small className="text-muted-foreground">{new Date(e.createdAt).toLocaleString()}</small></td><td>{e.email}<br />{e.phone}</td><td>{e.type}<br /><small>{e.category}</small></td>
               <td><select value={e.status} onChange={(ev) => setStatusOf(e.id, ev.target.value)} aria-label={`Status for ${e.name}`} className="border border-border bg-card p-2 text-xs">{['New', 'In Progress', 'Resolved'].map((s) => <option key={s}>{s}</option>)}</select></td>
               <td><div className="table-actions"><IconButton name="eye" label={open === e.id ? 'Hide details' : 'Read details'} onClick={() => setOpen(open === e.id ? null : e.id)} /><IconButton name="trash" label="Delete" onClick={() => remove(e.id)} /></div></td></tr>
             {open === e.id && <tr key={`${e.id}-d`}><td colSpan={5} className="whitespace-pre-wrap leading-relaxed"><strong>Message:</strong> {e.message}</td></tr>}
-          </>
+          </Fragment>
         ))}
       </tbody></table>
         {list.length === 0 && <div className="admin-empty">{data.enquiries.length ? 'No enquiries match your search.' : 'No enquiries yet. Submit the contact form on the website to see one appear here.'}</div>}
@@ -561,6 +571,7 @@ function SettingsManager() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email)) e.email = 'Enter a valid email address.';
     if (!validImageUrl(s.logo)) e.logo = 'Enter a valid logo image URL.';
     if (!s.credit.trim()) e.credit = 'The developer credit must remain visible.';
+    if (['primary', 'secondary', 'ivory', 'white', 'sage'].some((k) => !/^#[0-9a-fA-F]{6}$/.test(s[k]))) e.colors = 'Enter complete six-digit hex colours.';
     setErrors(e);
     if (Object.keys(e).length) return;
     setData((d) => ({ ...d, settings: { ...s, address: s.address.trim() || 'Address details to be updated' } }));
@@ -579,6 +590,7 @@ function SettingsManager() {
         <Field label="Footer developer credit *" error={errors.credit} full><input {...f('credit')} maxLength={120} /></Field>
       </div></div>
       <div className="admin-form"><h3>Brand Colours</h3><div className="form-grid">
+        {errors.colors && <p className="field-error" role="alert">{errors.colors}</p>}
         {colors.map(([k, l]) => <Field key={k} label={l}><div className="flex gap-2"><input type="color" value={s[k]} onChange={(e) => setS({ ...s, [k]: e.target.value.toUpperCase() })} className="h-12 w-16 p-1" aria-label={`${l} picker`} /><input value={s[k]} onChange={(e) => /^#[0-9a-fA-F]{0,6}$/.test(e.target.value) && setS({ ...s, [k]: e.target.value })} aria-label={`${l} hex`} /></div></Field>)}
       </div><Button variant="text" onClick={() => setS({ ...s, primary: '#1E2925', secondary: '#A8895B', ivory: '#F5F2EA', white: '#FFFFFF', sage: '#71866C' })}>Restore brand colours</Button></div>
       <div className="admin-form"><h3>Section Visibility</h3><div className="form-grid">
