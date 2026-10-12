@@ -1,5 +1,5 @@
 # Continue existing TISAN repository
-- [ ] Import original public site and admin without redesigning.
-- [ ] Transfer original architectural photos and logo.
-- [ ] Verify and repair enquiries, admin editing, filters and galleries.
-- [ ] Verify desktop and mobile layouts and current preview errors.
+- [x] Import original public site and admin without redesigning.
+- [x] Transfer original architectural photos and logo.
+- [x] Verify and repair enquiries, admin editing, filters and galleries.
+- [x] Verify desktop and mobile layouts and current preview errors.
