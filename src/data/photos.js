@@ -1,51 +1,100 @@
+import photo0 from '../assets/photo-0.jpg.asset.json';
+import photo1 from '../assets/photo-1.jpg.asset.json';
+import photo10 from '../assets/photo-10.jpg.asset.json';
+import photo11 from '../assets/photo-11.jpg.asset.json';
+import photo12 from '../assets/photo-12.jpg.asset.json';
+import photo13 from '../assets/photo-13.jpg.asset.json';
+import photo14 from '../assets/photo-14.jpg.asset.json';
+import photo15 from '../assets/photo-15.jpg.asset.json';
+import photo16 from '../assets/photo-16.jpg.asset.json';
+import photo17 from '../assets/photo-17.jpg.asset.json';
+import photo18 from '../assets/photo-18.jpg.asset.json';
+import photo19 from '../assets/photo-19.jpg.asset.json';
+import photo2 from '../assets/photo-2.jpg.asset.json';
+import photo20 from '../assets/photo-20.jpg.asset.json';
+import photo21 from '../assets/photo-21.jpg.asset.json';
+import photo22 from '../assets/photo-22.jpg.asset.json';
+import photo23 from '../assets/photo-23.jpg.asset.json';
+import photo24 from '../assets/photo-24.jpg.asset.json';
+import photo25 from '../assets/photo-25.jpg.asset.json';
+import photo26 from '../assets/photo-26.jpg.asset.json';
+import photo27 from '../assets/photo-27.jpg.asset.json';
+import photo28 from '../assets/photo-28.jpg.asset.json';
+import photo29 from '../assets/photo-29.jpg.asset.json';
+import photo3 from '../assets/photo-3.jpg.asset.json';
+import photo30 from '../assets/photo-30.jpg.asset.json';
+import photo31 from '../assets/photo-31.jpg.asset.json';
+import photo32 from '../assets/photo-32.jpg.asset.json';
+import photo33 from '../assets/photo-33.jpg.asset.json';
+import photo34 from '../assets/photo-34.jpg.asset.json';
+import photo35 from '../assets/photo-35.jpg.asset.json';
+import photo36 from '../assets/photo-36.jpg.asset.json';
+import photo37 from '../assets/photo-37.jpg.asset.json';
+import photo38 from '../assets/photo-38.jpg.asset.json';
+import photo39 from '../assets/photo-39.jpg.asset.json';
+import photo4 from '../assets/photo-4.jpg.asset.json';
+import photo40 from '../assets/photo-40.jpg.asset.json';
+import photo41 from '../assets/photo-41.jpg.asset.json';
+import photo42 from '../assets/photo-42.jpg.asset.json';
+import photo43 from '../assets/photo-43.jpg.asset.json';
+import photo44 from '../assets/photo-44.jpg.asset.json';
+import photo45 from '../assets/photo-45.jpg.asset.json';
+import photo46 from '../assets/photo-46.jpg.asset.json';
+import photo5 from '../assets/photo-5.jpg.asset.json';
+import photo50 from '../assets/photo-50.jpg.asset.json';
+import photo51 from '../assets/photo-51.jpg.asset.json';
+import photo6 from '../assets/photo-6.jpg.asset.json';
+import photo7 from '../assets/photo-7.jpg.asset.json';
+import photo8 from '../assets/photo-8.jpg.asset.json';
+import photo9 from '../assets/photo-9.jpg.asset.json';
 export const photoUrls = {
-  "0": "/__l5e/assets-v1/28ff3baa-5e77-4c81-b9ef-be861d04b423/architecture-0.jpg",
-  "1": "/__l5e/assets-v1/3d5519e7-9118-48f9-a631-d6bfba54881a/architecture-1.jpg",
-  "2": "/__l5e/assets-v1/49e3cc10-2435-4d57-98ff-c1e91a514279/architecture-2.jpg",
-  "3": "/__l5e/assets-v1/84329a9c-0c98-48a3-8a37-d55cb823b324/architecture-3.jpg",
-  "4": "/__l5e/assets-v1/b051053a-09ca-4f22-bb9a-630f22286525/architecture-4.jpg",
-  "5": "/__l5e/assets-v1/06f279f4-cab3-490f-91ff-23d801005baa/architecture-5.jpg",
-  "6": "/__l5e/assets-v1/1d74c35e-8901-4672-9102-23aecfb311e0/architecture-6.jpg",
-  "7": "/__l5e/assets-v1/124ef228-29f2-4435-84ee-b8addd18c871/architecture-7.jpg",
-  "8": "/__l5e/assets-v1/4fae9a09-d825-41b5-96bd-eeeb501e1048/architecture-8.jpg",
-  "9": "/__l5e/assets-v1/5282394a-17ad-4427-a286-78c5b5491696/architecture-9.jpg",
-  "10": "/__l5e/assets-v1/8d085467-b971-447b-a229-92f6d2ed8e68/architecture-10.jpg",
-  "11": "/__l5e/assets-v1/87fbf48e-34d5-49ce-b86e-4155bf4efa49/architecture-11.jpg",
-  "12": "/__l5e/assets-v1/03208cef-58dc-407c-b473-a61c7167345a/architecture-12.jpg",
-  "13": "/__l5e/assets-v1/ebcee875-c4f1-42a2-b885-7c1fb359e88a/architecture-13.jpg",
-  "14": "/__l5e/assets-v1/6ab23446-504f-4428-9369-a20495e1e0b8/architecture-14.jpg",
-  "15": "/__l5e/assets-v1/0041b003-56b2-4b63-b440-b541a5abcd7c/architecture-15.jpg",
-  "16": "/__l5e/assets-v1/3179504e-011b-4be9-931d-c19f9d52b121/architecture-16.jpg",
-  "17": "/__l5e/assets-v1/a01435db-57a6-4b9c-9eb5-7dfeefa3f764/architecture-17.jpg",
-  "18": "/__l5e/assets-v1/1a44a09f-f87b-4414-a146-3b0cbd13af86/architecture-18.jpg",
-  "19": "/__l5e/assets-v1/f805fc9d-9935-4106-bf61-abdc4512e247/architecture-19.jpg",
-  "20": "/__l5e/assets-v1/0fa05fcf-836d-4094-8e11-1096ce03f8de/architecture-20.jpg",
-  "21": "/__l5e/assets-v1/382c1be7-64c6-4f8c-8398-642c24d9ce15/architecture-21.jpg",
-  "22": "/__l5e/assets-v1/5ea2e2cc-6bd6-49af-8cd4-54c6ab2ac0e4/architecture-22.jpg",
-  "23": "/__l5e/assets-v1/b364458e-6c2f-4126-8d3e-3aa4683849b5/architecture-23.jpg",
-  "24": "/__l5e/assets-v1/5f1098be-bd14-4e88-a7cd-b472e1e32afc/architecture-24.jpg",
-  "25": "/__l5e/assets-v1/bf0ccacb-1b02-44e1-9cc6-63f99be704d1/architecture-25.jpg",
-  "26": "/__l5e/assets-v1/e1d57f85-804a-4e81-ab7d-715ba6e70656/architecture-26.jpg",
-  "27": "/__l5e/assets-v1/ea85b61b-def1-414f-8b27-686c0e432c0b/architecture-27.jpg",
-  "28": "/__l5e/assets-v1/2b65d338-14b2-4386-b876-4e319ddaa298/architecture-28.jpg",
-  "29": "/__l5e/assets-v1/4d94016e-b2e9-4865-8680-4a471eafee00/architecture-29.jpg",
-  "30": "/__l5e/assets-v1/5e2e72fb-a779-4c4b-afbd-5c28ad7795ef/architecture-30.jpg",
-  "31": "/__l5e/assets-v1/90195a34-c80c-4a5c-b217-db60159ea24c/architecture-31.jpg",
-  "32": "/__l5e/assets-v1/8782880e-2ebe-4984-8544-366b9ce3049c/architecture-32.jpg",
-  "33": "/__l5e/assets-v1/d546ede4-d65b-4968-97ad-3e847be275ab/architecture-33.jpg",
-  "34": "/__l5e/assets-v1/6babcd91-d7d0-40eb-9f9b-c34b0f523168/architecture-34.jpg",
-  "35": "/__l5e/assets-v1/3d25da45-4ed6-44a2-ad87-cb82a3b57b11/architecture-35.jpg",
-  "36": "/__l5e/assets-v1/0a31d650-e969-4637-ad30-1d5034607138/architecture-36.jpg",
-  "37": "/__l5e/assets-v1/f44107f7-cb34-49cd-9f98-80754e01daed/architecture-37.jpg",
-  "38": "/__l5e/assets-v1/6005f814-7961-4195-a5a2-1cbd2b3e912c/architecture-38.jpg",
-  "39": "/__l5e/assets-v1/81603cd5-e98d-4cc1-a210-345693ea869c/architecture-39.jpg",
-  "40": "/__l5e/assets-v1/86616376-febd-444d-afde-47b4233761dd/architecture-40.jpg",
-  "41": "/__l5e/assets-v1/5e0abdfa-925d-4841-aaf2-31233df5fc00/architecture-41.jpg",
-  "42": "/__l5e/assets-v1/514d190a-81a2-427d-bc2f-fa9e50a86d41/architecture-42.jpg",
-  "43": "/__l5e/assets-v1/e8818093-c652-4e49-ab99-dc38768c73eb/architecture-43.jpg",
-  "44": "/__l5e/assets-v1/beb3818b-142c-4af0-bf69-c89fbeec89bb/architecture-44.jpg",
-  "45": "/__l5e/assets-v1/047a530b-0f75-4d14-a348-ce08e02e53a7/architecture-45.jpg",
-  "46": "/__l5e/assets-v1/dbc2fbce-8529-4615-8e00-f794136c5b00/architecture-46.jpg",
-  "50": "/__l5e/assets-v1/b8bbf7e4-deb2-4075-97bb-334bab8a6f69/architecture-50.jpg",
-  "51": "/__l5e/assets-v1/6547f74b-5f35-4b19-8737-58e1b74db282/architecture-51.jpg"
+  "0": photo0.url,
+  "1": photo1.url,
+  "10": photo10.url,
+  "11": photo11.url,
+  "12": photo12.url,
+  "13": photo13.url,
+  "14": photo14.url,
+  "15": photo15.url,
+  "16": photo16.url,
+  "17": photo17.url,
+  "18": photo18.url,
+  "19": photo19.url,
+  "2": photo2.url,
+  "20": photo20.url,
+  "21": photo21.url,
+  "22": photo22.url,
+  "23": photo23.url,
+  "24": photo24.url,
+  "25": photo25.url,
+  "26": photo26.url,
+  "27": photo27.url,
+  "28": photo28.url,
+  "29": photo29.url,
+  "3": photo3.url,
+  "30": photo30.url,
+  "31": photo31.url,
+  "32": photo32.url,
+  "33": photo33.url,
+  "34": photo34.url,
+  "35": photo35.url,
+  "36": photo36.url,
+  "37": photo37.url,
+  "38": photo38.url,
+  "39": photo39.url,
+  "4": photo4.url,
+  "40": photo40.url,
+  "41": photo41.url,
+  "42": photo42.url,
+  "43": photo43.url,
+  "44": photo44.url,
+  "45": photo45.url,
+  "46": photo46.url,
+  "5": photo5.url,
+  "50": photo50.url,
+  "51": photo51.url,
+  "6": photo6.url,
+  "7": photo7.url,
+  "8": photo8.url,
+  "9": photo9.url
 };
